@@ -70,4 +70,13 @@ changeUserInfo(profileInfo){
 
 }
 
+export const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-13',
+  headers: {
+  'Content-Type': 'application/json',
+  authorization: '8ed74a04-ed04-4c07-90fb-2948fe98949f',
+  }
+})
+
+
 export default Api;

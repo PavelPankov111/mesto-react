@@ -10,19 +10,19 @@ function App() {
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
 
 function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
+  setIsEditProfilePopupOpen(true)
 } 
 
 const [isAddPlaceOpen, setIsAddPlaceOpen] = React.useState(false)
 
 function handleAddPlaceClick () {
-  setIsAddPlaceOpen(!isAddPlaceOpen)
+  setIsAddPlaceOpen(true)
 }
 
 const [isEditAvatarOpen, setIsEditAvatarOpen] = React.useState(false)
 
 function handleEditAvatarClick(){
-  setIsEditAvatarOpen(!isEditAvatarOpen)
+  setIsEditAvatarOpen(true)
 }
 
 function closeAllPopups() {
@@ -40,14 +40,14 @@ const [selectedCard, setSelectedCard] = React.useState({});
       title:name,
       url:link
     })
-    setIsImagePopupOpen(!isImagePopupOpen)
+    setIsImagePopupOpen(true)
   }
   
   return (
     <div className="page">
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardImage={handleCardClick}>
-     
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardImage={handleCardClick}> 
+      </Main>
       <PopupWithForm title="Редактировать профиль" namePopup="" titleButton="Сохранить" isOpen={isEditProfilePopupOpen} close={closeAllPopups}>
             <div className="popup__inputs">
                
@@ -74,13 +74,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
         <span id="avatar-link-error" className="error"></span>
       </PopupWithForm>
       <ImagePopup  url={selectedCard.url} title={selectedCard.title} isOpen={isImagePopupOpen} onClose={closeAllPopups}>
-        {    console.log(selectedCard),
-         console.log(selectedCard.title),
-         console.log(selectedCard.url)
-        }
       </ImagePopup>
-      </Main>
-      
       <Footer />
     </div>
   );
