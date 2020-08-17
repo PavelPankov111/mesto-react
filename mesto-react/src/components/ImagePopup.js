@@ -2,6 +2,7 @@ import React from 'react';
 import popupVectorElement from '../images/close__icon.svg';
 
 function ImagePopup(props) {
+    return(
     <div className={`popup popup-element ${props.isOpen ? 'popup_opened' : ''} `}> 
     <div className="popup__element-container">
     <img className="popup__element-image"  alt="" src={props.url}/>
@@ -11,6 +12,7 @@ function ImagePopup(props) {
     </button>
     </div>
     </div>
+    )
 }
 
 export default ImagePopup;

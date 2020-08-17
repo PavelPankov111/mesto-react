@@ -44,8 +44,6 @@ function Main(props){
   })
  }, [])
 
-
- 
   return(
     <main>
     <section className="profile">
@@ -69,8 +67,8 @@ function Main(props){
     </section>
     <div className="loading"></div>
     <section className="elements">
-    {cards.map(({ id, ...props }) => <Card onCardClick={onCardClick} key={id} {...props} />)}     {console.log(props)}
-      </section>
+    {cards.map(({ id, ...whatever }) => <Card key={id} {...whatever} onCardClick={props.onCardImage}/> )}
+    </section>
     {props.children}
       
     {/* <div className="popup">

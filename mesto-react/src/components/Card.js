@@ -3,8 +3,7 @@ import React from 'react';
 function Card(props) {
 
 function handleClick() {
-    onCardClick( props.url, props.title);
-    
+    props.onCardClick(props.url , props.title)
 }
     
 return(
