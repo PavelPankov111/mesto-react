@@ -12,6 +12,7 @@
     background-repeat: no-repeat;
     cursor: pointer;
     outline: none;
+    display: none;
 }
 
 .element__trashs:hover{
