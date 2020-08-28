@@ -1,8 +1,7 @@
 import React from 'react';
 import popupVector from '../images/close__icon.svg';
 
-function PopupWithForm(props) {
-    
+function PopupWithForm(props){
     return(
         <div className={`popup popup${props.namePopup} ${props.isOpen ? 'popup_opened' : ''} `}>
         <form name="OpenForm" method="get" action="#" className={`form popup${props.namePopup}__container popup__form`} noValidate>

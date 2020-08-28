@@ -68,6 +68,32 @@ changeUserInfo(profileInfo){
   .catch(this._handleResponseError)
 }
 
+deleteCard(item){
+  return fetch(`${this.url}/cards/${item}`, {
+    method: 'DELETE',
+    headers: this.headers
+  })
+  .then(this._handleResponse)
+    .catch(this._handleResponseError)
+  }
+  
+  setLike(item) {
+    return fetch(`${this.url}/cards/likes/${item}`, {
+      method: 'PUT',
+      headers: this.headers
+    })
+    .then(this._handleResponse)
+    .catch(this._handleResponseError)
+  }
+  
+  removeLike(item) {
+  return fetch(`${this.url}/cards/likes/${item}`, {
+    method: 'DELETE',
+    headers: this.headers
+    })
+    .then(this._handleResponse)
+    .catch(this._handleResponseError)
+  }
 }
 
 export const api = new Api({

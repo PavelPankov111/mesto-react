@@ -11,8 +11,25 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext'
 
 function App() {
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
-const [currentUser, setCurrentUser] = React.useState()
+const [currentUser, setCurrentUser] = React.useState({
+  name: '',
+  avatar: '',
+  about: '',
+  _id: ''
+});
 
+React.useEffect(() =>{ 
+  api.getUserInfo()
+  .then( res =>{
+    setCurrentUser(res)
+  })
+  .catch((err) => {
+    console.log(err); 
+});     
+}, [])
+
+
+ 
 function handleEditProfileClick() {
   setIsEditProfilePopupOpen(true)
 } 
@@ -50,13 +67,45 @@ const [selectedCard, setSelectedCard] = React.useState({});
   const [cards, setCards] = React.useState([]);
   React.useEffect( () =>{
   api.getInitialCards()
-  .then((data) =>{
-    setCards(data)
+  .then( (data) =>{
+    setCards(
+    data.map((item) =>({
+        _id: item._id,
+        link: item.link,
+        name: item.name,
+        likes: item.likes,
+        owner: item.owner
+    }))
+    )
   })
   .catch((err) => {
     console.log(err); 
   });     
   }, [])
+
+
+  function handleClickLike(props) {
+    console.log(props)
+
+    const isLiked = props.likes.some(i => i._id === currentUser._id);
+  
+    if(!isLiked){
+      console.log(props._id)
+      console.log(props)
+
+      api.setLike(props._id)
+      .then((newCard) => {
+        const newCards = cards.map((c) => c._id === props._id ? newCard : c);
+        setCards(newCards);
+      })
+    } else {
+      api.removeLike(props._id)
+      .then((newCard) => {
+        const newCards = cards.map((c) => c._id === props._id ? newCard : c);
+        setCards(newCards);
+      })
+    }
+  }
   
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -64,9 +113,9 @@ const [selectedCard, setSelectedCard] = React.useState({});
       <Header />
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}> 
       </Main>
- <section className="elements">
-    {cards.map((card) => <Card key={card._id} {...card} onCardClick={handleCardClick}/> )}
-    </section>
+      <section className="elements">
+        {cards.map(({ id, ...whatever }) => <Card key={id} onCardClick={handleCardClick} onClickLike={() => {handleClickLike(whatever)}} {...whatever}/> )}
+     </section>
       <PopupWithForm title="Редактировать профиль" namePopup="" titleButton="Сохранить" isOpen={isEditProfilePopupOpen} close={closeAllPopups}>
             <div className="popup__inputs">
                
