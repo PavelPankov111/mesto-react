@@ -8,9 +8,9 @@ function Main(props){
   const [currentUser, setCurrentUser] = React.useState({
     name: '',
     avatar: '',
-    about: ''
+    about: '',
+    _id: ''
   });
-console.log(currentUser)
 React.useEffect(() =>{ 
   api.getUserInfo()
   .then( res =>{
@@ -23,7 +23,6 @@ React.useEffect(() =>{
 
 
 return(
-<CurrentUserContext.Provider value={currentUser}>
 <main>
     <section className="profile">
     <div className="profile__avatar-info">
@@ -46,7 +45,6 @@ return(
     </section>
     <div className="loading"></div>
 </main>
-</CurrentUserContext.Provider>
 )
 }
 

@@ -7,9 +7,11 @@ import PopupWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import {api} from '../utils/Api';
 import Card from './Card'
+import {CurrentUserContext} from '../contexts/CurrentUserContext'
 
 function App() {
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
+const [currentUser, setCurrentUser] = React.useState()
 
 function handleEditProfileClick() {
   setIsEditProfilePopupOpen(true)
@@ -57,6 +59,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
   }, [])
   
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Header />
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}> 
@@ -93,6 +96,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
       </ImagePopup>
       <Footer />
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
