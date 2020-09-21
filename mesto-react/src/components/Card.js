@@ -2,7 +2,7 @@ import React from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 function Card(props) { 
-const {name, likes, link, onCardClick, owner, onClickLike} = props; 
+const {name, likes, link, onCardClick, owner, onClickLike, onCardDelete} = props; 
 
 function handleClick() { 
     onCardClick(link , name) 
@@ -10,7 +10,7 @@ function handleClick() {
 
 const cardId = React.useContext(CurrentUserContext);
 
-const isOwn = owner.id === cardId._id;
+const isOwn = owner._id === cardId._id;
   
 
 const cardDeleteButtonClassName = (
@@ -24,7 +24,7 @@ const cardLikeButtonClassName = `${isLiked ? 'element__button-like_active' : 'el
 return( 
 <div className="element"> 
     <img className="element__image" alt={name}  src={link} onClick={handleClick}/> 
-    <button className={cardDeleteButtonClassName} type="reset"> 
+    <button className={cardDeleteButtonClassName} onClick={onCardDelete} type="reset"> 
     </button> 
     <div className="element__title-like"> 
         <h2 className="element__title">{name}</h2> 

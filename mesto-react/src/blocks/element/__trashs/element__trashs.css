@@ -1,21 +1,4 @@
 .element__trashs{
-    position: absolute;
-    top: 17px;
-    z-index: 2;
-    left: 245px;
-    border: none;
-    background: rgba(0,0,0,0.01);
-    padding: 0;
-    background-image: url(../../../images/trash.svg);
-    width: 19px;
-    height: 19px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    outline: none;
     display: none;
 }
 
-.element__trashs:hover{
-    opacity: .6;
-    transition: .2s;
-}
