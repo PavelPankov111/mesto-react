@@ -55,13 +55,13 @@ addCard(item){
   .catch(this._handleResponseError)
 }
 
-changeUserInfo(profileInfo){
+changeUserInfo(value){
   return fetch(`${this.url}/users/me`, {
     method: 'PATCH',
     headers: this.headers,
     body: JSON.stringify({
-        name: profileInfo.profileName,
-        about: profileInfo.info
+        name: value.profileName,
+        about: value.info
     })
   })
   .then(this._handleResponse)

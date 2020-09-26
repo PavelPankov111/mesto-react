@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -12,6 +12,7 @@ import DeletePopup from './DeletePopup'
 import EditProfilePopup from './EditProfilePopup'
 
 function App() {
+const popupDeletSubmitButton = document.querySelector('.popup-delete__button')
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
 const [currentUser, setCurrentUser] = React.useState({
   name: '',
@@ -29,10 +30,10 @@ React.useEffect(() =>{
     console.log(err); 
 });     
 }, [])
- 
-function handleEditProfileClick() {
+
+const handleEditProfileClick = useCallback(()=>{
   setIsEditProfilePopupOpen(true)
-} 
+}) 
 
 const [isAddPlaceOpen, setIsAddPlaceOpen] = React.useState(false)
 
@@ -104,43 +105,63 @@ const [selectedCard, setSelectedCard] = React.useState({});
   const [isPopupDeleteOpen, setIsPopupDeleteOpen] = React.useState(false)
   const [cardDelete, setCardDelete] = React.useState([])
 
+  function handleDeleteItem(item){
+    setCardDelete(item)
+    handleDeleteOpen()
+  }
+
   function handleDeleteOpen(){
     setIsPopupDeleteOpen(true)
   }
-
-  function handleDeleteCard(card){
-  api.deleteCard(card._id)
+ 
+  function handleDeleteCard(evt){
+  evt.preventDefault()
+  popupDeletSubmitButton.textContent= 'Удаление...'
+  api.deleteCard(cardDelete._id)
   .then(() =>{
     const newCards = cards.filter(function(c){
-      return c._id !== card._id;
+      popupDeletSubmitButton.textContent= 'Да'
+      return c._id !== cardDelete._id;
     })
     setCards(newCards)
     })
     .catch((err) => {
       console.log(err); 
     }); 
+    setIsPopupDeleteOpen(false)
+  }
+
+  function handleUpdateUser(item) {
+    api.changeUserInfo(item)
+    .then( () =>{
+      setCurrentUser({
+        name: item.name,
+        about: item.about
+      })
+    })
+    setIsEditProfilePopupOpen(false)
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Header/>
-      <DeletePopup title="Вы уверенны?" namePopup="-delete" titleButton="Да" isOpen={isPopupDeleteOpen} close={closeAllPopups} onDeleteCard={()=> handleDeleteOpen()}/>
+      <DeletePopup title="Вы уверенны?" namePopup="-delete" titleButton="Да" isOpen={isPopupDeleteOpen} close={closeAllPopups} handleSubmit={handleDeleteCard}/>
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} > 
       </Main>
       <section className="elements">
-        {cards.map(({ id, ...whatever }) => <Card key={id} onCardDelete={() => {handleDeleteCard(whatever)}} onCardClick={handleCardClick} onClickLike={() => {handleClickLike(whatever)}} {...whatever}/> )}
-     </section>
-     <EditProfilePopup onClose={closeAllPopups} isOpen={isEditProfilePopupOpen}/>
-        <PopupWithForm title="Новое место" namePopup="-pluse" titleButton="Создать" isOpen={isAddPlaceOpen} close={closeAllPopups}>
+        {cards.map(({ id, ...whatever }) => <Card key={id} onCardDelete={() => handleDeleteItem(whatever)} onCardClick={handleCardClick} onClickLike={() => {handleClickLike(whatever)}} {...whatever}/> )}
+      </section>
+      <EditProfilePopup onClose={closeAllPopups} isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}/>
+      <PopupWithForm title="Новое место" namePopup="-pluse" titleButton="Создать" isOpen={isAddPlaceOpen} close={closeAllPopups}>
       <div className="popup-pluse__inputs">
-            <input type="text" autoComplete="off" id="name-card" name="name" className="popup-pluse__input popup__input" placeholder="Название" required ="1" maxLength="30" /> 
+        <input type="text" autoComplete="off" id="name-card" name="name" className="popup-pluse__input popup__input" placeholder="Название" required ="1" maxLength="30" /> 
 
-            <span id="name-card-error" className="error"></span>
+        <span id="name-card-error" className="error"></span>
 
-            <input  type="url" autoComplete="off" id="link" name="link" className="popup__input  popup-pluse__input-link" placeholder="Ссылка на картинку" required /> 
+        <input  type="url" autoComplete="off" id="link" name="link" className="popup__input  popup-pluse__input-link" placeholder="Ссылка на картинку" required /> 
 
-            <span id="link-error" className="error"></span>
+        <span id="link-error" className="error"></span>
         </div>
       </PopupWithForm>
       <PopupWithForm title="Обновить аватар" namePopup="-avatar" titleButton="Сохранить" isOpen={isEditAvatarOpen} close={closeAllPopups}>
