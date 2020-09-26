@@ -134,10 +134,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
   function handleUpdateUser(item) {
     api.changeUserInfo(item)
     .then( () =>{
-      setCurrentUser({
-        name: item.name,
-        about: item.about
-      })
+      setCurrentUser(item)
     })
     setIsEditProfilePopupOpen(false)
   }

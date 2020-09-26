@@ -60,8 +60,8 @@ changeUserInfo(value){
     method: 'PATCH',
     headers: this.headers,
     body: JSON.stringify({
-        name: value.profileName,
-        about: value.info
+        name: value.name,
+        about: value.about
     })
   })
   .then(this._handleResponse)
