@@ -38,8 +38,8 @@ changeAvatar(form){
     method: 'PATCH',
     headers: this.headers,
     body: JSON.stringify({
-          avatar: form
-        })
+      avatar: form
+    })
   })
   .then(this._handleResponse)
   .catch(this._handleResponseError)
