@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/PavelPankov111/mesto/static/css/main.54e35254.chunk.css",
-    "main.js": "/PavelPankov111/mesto/static/js/main.9497b838.chunk.js",
-    "main.js.map": "/PavelPankov111/mesto/static/js/main.9497b838.chunk.js.map",
-    "runtime-main.js": "/PavelPankov111/mesto/static/js/runtime-main.dfddd0c8.js",
-    "runtime-main.js.map": "/PavelPankov111/mesto/static/js/runtime-main.dfddd0c8.js.map",
-    "static/js/2.e3db80bf.chunk.js": "/PavelPankov111/mesto/static/js/2.e3db80bf.chunk.js",
-    "static/js/2.e3db80bf.chunk.js.map": "/PavelPankov111/mesto/static/js/2.e3db80bf.chunk.js.map",
-    "index.html": "/PavelPankov111/mesto/index.html",
-    "precache-manifest.b8b7075d5d940f6f44c1f28ad5b24067.js": "/PavelPankov111/mesto/precache-manifest.b8b7075d5d940f6f44c1f28ad5b24067.js",
-    "service-worker.js": "/PavelPankov111/mesto/service-worker.js",
-    "static/css/main.54e35254.chunk.css.map": "/PavelPankov111/mesto/static/css/main.54e35254.chunk.css.map",
-    "static/js/2.e3db80bf.chunk.js.LICENSE.txt": "/PavelPankov111/mesto/static/js/2.e3db80bf.chunk.js.LICENSE.txt",
-    "static/media/close__icon.svg": "/PavelPankov111/mesto/static/media/close__icon.5df32a06.svg",
-    "static/media/index.css": "/PavelPankov111/mesto/static/media/trash.d8078343.svg",
-    "static/media/vector.svg": "/PavelPankov111/mesto/static/media/vector.c6f11019.svg",
-    "static/media/vector1.svg": "/PavelPankov111/mesto/static/media/vector1.6bfdb354.svg",
-    "static/media/vector2.svg": "/PavelPankov111/mesto/static/media/vector2.b2fce4ac.svg"
+    "main.css": "/PavelPankov111/mesto-react/static/css/main.46db1cbc.chunk.css",
+    "main.js": "/PavelPankov111/mesto-react/static/js/main.14e47a3b.chunk.js",
+    "main.js.map": "/PavelPankov111/mesto-react/static/js/main.14e47a3b.chunk.js.map",
+    "runtime-main.js": "/PavelPankov111/mesto-react/static/js/runtime-main.751c5817.js",
+    "runtime-main.js.map": "/PavelPankov111/mesto-react/static/js/runtime-main.751c5817.js.map",
+    "static/js/2.f0db7de8.chunk.js": "/PavelPankov111/mesto-react/static/js/2.f0db7de8.chunk.js",
+    "static/js/2.f0db7de8.chunk.js.map": "/PavelPankov111/mesto-react/static/js/2.f0db7de8.chunk.js.map",
+    "index.html": "/PavelPankov111/mesto-react/index.html",
+    "precache-manifest.388f328641e9cf8379fe2e45276c666e.js": "/PavelPankov111/mesto-react/precache-manifest.388f328641e9cf8379fe2e45276c666e.js",
+    "service-worker.js": "/PavelPankov111/mesto-react/service-worker.js",
+    "static/css/main.46db1cbc.chunk.css.map": "/PavelPankov111/mesto-react/static/css/main.46db1cbc.chunk.css.map",
+    "static/js/2.f0db7de8.chunk.js.LICENSE.txt": "/PavelPankov111/mesto-react/static/js/2.f0db7de8.chunk.js.LICENSE.txt",
+    "static/media/close__icon.svg": "/PavelPankov111/mesto-react/static/media/close__icon.5df32a06.svg",
+    "static/media/index.css": "/PavelPankov111/mesto-react/static/media/trash.d8078343.svg",
+    "static/media/vector.svg": "/PavelPankov111/mesto-react/static/media/vector.c6f11019.svg",
+    "static/media/vector1.svg": "/PavelPankov111/mesto-react/static/media/vector1.6bfdb354.svg",
+    "static/media/vector2.svg": "/PavelPankov111/mesto-react/static/media/vector2.b2fce4ac.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.dfddd0c8.js",
-    "static/js/2.e3db80bf.chunk.js",
-    "static/css/main.54e35254.chunk.css",
-    "static/js/main.9497b838.chunk.js"
+    "static/js/runtime-main.751c5817.js",
+    "static/js/2.f0db7de8.chunk.js",
+    "static/css/main.46db1cbc.chunk.css",
+    "static/js/main.14e47a3b.chunk.js"
   ]
 }
