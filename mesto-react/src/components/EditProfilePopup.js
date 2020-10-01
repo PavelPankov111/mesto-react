@@ -63,22 +63,22 @@ function EditProfilePopup(props){
         });
     }
 
-    function handleChangeName(e){
+    function handleChangeInputs(e){
         setName(e.target.value)
+        setDescription(e.target.value)
+
     }
 
-    function handleChangeDescription(e){
-        setDescription(e.target.value)
-    }
+
     // disabled={isSubmitDisabled} onDisabled={handleDisableButton}
     return(
     <PopupWithForm title="Редактировать профиль" namePopup="" titleButton="Сохранить" isOpen={isOpen} close={onClose} onSubmit={handleInputChange} >
         <div className="popup__inputs">
         {/* onChange={handleInputValidation} */}
-        <input type="text" autoComplete="off" id="user-name" value={name}   name="profileName" className="popup__input" placeholder="Имя"  required ="2" maxLength="40" onChange={handleChangeName}  />
+        <input type="text" autoComplete="off" id="user-name" value={name}   name="profileName" className="popup__input" placeholder="Имя"  required ="2" maxLength="40" onChange={handleInputValidation}  />
         <span id="user-name-error" className="error"></span>
         {/* onChange={handleInputValidation} */}
-        <input type="text" autoComplete="off" id="about-user"  value={description} name="info" className="popup__input" placeholder="О себе"  required ="2" maxLength="200" onChange={handleChangeDescription} />
+        <input type="text" autoComplete="off" id="about-user"  value={description} name="info" className="popup__input" placeholder="О себе"  required ="2" maxLength="200" onChange={handleInputValidation} />
         <span id="about-user-error" className="error"></span>
     </div>    
     </PopupWithForm>
