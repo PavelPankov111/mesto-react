@@ -3,21 +3,19 @@ import PopupWithForm from './PopupWithForm'
 import {CurrentUserContext} from '../contexts/CurrentUserContext'
 
 function EditProfilePopup(props){
-    const [name, setName] =  React.useState('')
-    const [description, setDescription] = React.useState('')
-
     const [editProfilePopupValues, setEditProfilePopupValues] = useState({
-        name: "", 
-        description: ""
+        profileName: "",
+        info: ""
     });
 
     const [editProfilePopupValidity, setEditProfilePopupValidity] = useState({
-        nameValid: false,
-        aboutValid: false
+        profileNameValid: false,
+        infoValid: false
     });
 
     const handleInputValidation = useCallback(
         (e) => {
+         
           const { name, value } = e.target;
           setEditProfilePopupValues((prevState) => ({ ...prevState, [name]: value }));
         },[editProfilePopupValues]
@@ -25,31 +23,33 @@ function EditProfilePopup(props){
 
     useEffect(
         function validateInputs() {
-        const isUserNameFilled = editProfilePopupValues.name.length > 2;
+        const isUserNameFilled = editProfilePopupValues.profileName.length > 2;
         const isUserNameValid = isUserNameFilled;
 
-        const isDescriptionFilled = editProfilePopupValues.description.length > 2;
+        const isDescriptionFilled = editProfilePopupValues.info.length > 2;
         const isDescriptionValid = isDescriptionFilled;
 
         setEditProfilePopupValidity(() => ({
-            nameValid: isUserNameValid,
-            aboutValid: isDescriptionValid
+            profileNameValid: isUserNameValid,
+            infoValid: isDescriptionValid
         }));
         },
         [editProfilePopupValues, setEditProfilePopupValidity]
     );
 
+    const { profileName, info } = editProfilePopupValues;
 
-    const { nameValid, aboutValid } = editProfilePopupValidity;
+    const { profileNameValid, infoValid } = editProfilePopupValidity;
 
-    const isSubmitDisabled = !nameValid || !aboutValid;
+    const isSubmitDisabled = !profileNameValid || !infoValid;
 
     const handleDisableButton = (
         `${isSubmitDisabled ? 'popup__button_disabled' : ''}`
     )
 
     const currentUser = React.useContext(CurrentUserContext);
-    
+    const [name, setName] =  React.useState('')
+    const [description, setDescription] = React.useState('')
     const {onClose, isOpen, onUpdateUser} = props
     React.useEffect(() => {
         setName(currentUser.name);
@@ -62,22 +62,26 @@ function EditProfilePopup(props){
             name , 
             about: description
         });
-        handleInputValidation()
     }
 
     function handleChangeName(e){
+        handleInputValidation(e)
         setName(e.target.value)
     }
 
     function handleChangeDescription(e){
+        handleInputValidation(e)
         setDescription(e.target.value)
     }
+    // disabled={isSubmitDisabled} onDisabled={handleDisableButton}
     return(
     <PopupWithForm title="Редактировать профиль" namePopup="" titleButton="Сохранить" isOpen={isOpen} close={onClose} onSubmit={handleInputChange} disabled={isSubmitDisabled} onDisabled={handleDisableButton}>
         <div className="popup__inputs">
-        <input type="text" autoComplete="off" id="user-name" value={name}   name="profileName" className="popup__input" placeholder="Имя"  required ="2" maxLength="40" onChange={handleChangeName}  />
+        {/* onChange={handleInputValidation} */}
+        <input type="text" autoComplete="off" id="user-name" value={profileName} name="profileName" className="popup__input" placeholder="Имя"  required ="2" maxLength="40" onChange={handleChangeName}  />
         <span id="user-name-error" className="error"></span>
-        <input type="text" autoComplete="off" id="about-user"  value={description} name="info" className="popup__input" placeholder="О себе"  required ="2" maxLength="200" onChange={handleChangeDescription} />
+        {/* onChange={handleInputValidation} */}
+        <input type="text" autoComplete="off" id="about-user"  value={info} name="info" className="popup__input" placeholder="О себе"  required ="2" maxLength="200" onChange={handleChangeDescription} />
         <span id="about-user-error" className="error"></span>
     </div>    
     </PopupWithForm>
