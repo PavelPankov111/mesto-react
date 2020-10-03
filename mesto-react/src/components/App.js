@@ -161,7 +161,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
     popupPluseButton.textContent="Сохранение..."
     api.addCard(item)
     .then((res)=>{
-      setCards([...cards, res]); 
+      setCards([res, ...cards]); 
       popupPluseButton.textContent="Сохранить"
     })
     setIsAddPlaceOpen(false)
