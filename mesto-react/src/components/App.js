@@ -3,7 +3,6 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import '../pages/index.css'
-import PopupWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import {api} from '../utils/Api';
 import Card from './Card'
@@ -129,12 +128,12 @@ const [selectedCard, setSelectedCard] = React.useState({});
       popupDeletSubmitButton.textContent= 'Да'
       return c._id !== cardDelete._id;
     })
+    setIsPopupDeleteOpen(false)
     setCards(newCards)
     })
     .catch((err) => {
       console.log(err); 
     }); 
-    setIsPopupDeleteOpen(false)
   }
 
   function handleUpdateUser(item) {
@@ -142,9 +141,12 @@ const [selectedCard, setSelectedCard] = React.useState({});
     api.changeUserInfo(item)
     .then( (obj) =>{
       setCurrentUser(obj)
+      setIsEditProfilePopupOpen(false)
       popupButton.textContent="Сохранить"
     })
-    setIsEditProfilePopupOpen(false)
+    .catch((err) => {
+      console.log(err); 
+    }); 
   }
 
   function handleUpdateAvatar(obj){
@@ -152,9 +154,12 @@ const [selectedCard, setSelectedCard] = React.useState({});
     api.changeAvatar(obj)
     .then((res)=>{
       setCurrentUser(res)
+      setIsEditAvatarOpen(false)
       popupAvatarButton.textContent="Сохранить"
     })
-    setIsEditAvatarOpen(false)
+    .catch((err) => {
+      console.log(err); 
+    }); 
   }
 
   function handleAddPlaceSubmit(item){
@@ -162,9 +167,12 @@ const [selectedCard, setSelectedCard] = React.useState({});
     api.addCard(item)
     .then((res)=>{
       setCards([res, ...cards]); 
+      setIsAddPlaceOpen(false)
       popupPluseButton.textContent="Сохранить"
     })
-    setIsAddPlaceOpen(false)
+    .catch((err) => {
+      console.log(err); 
+    }); 
   }
 
   return (
@@ -175,7 +183,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} > 
       </Main>
       <section className="elements">
-        {cards.map(({ id, ...whatever }) => <Card key={id} onCardDelete={() => handleDeleteItem(whatever)} onCardClick={handleCardClick} onClickLike={() => {handleClickLike(whatever)}} {...whatever}/> )}
+        {cards.map(({ ...whatever}) => <Card {...whatever} key={whatever._id} onCardDelete={() => handleDeleteItem(whatever)} onCardClick={handleCardClick} onClickLike={() => {handleClickLike(whatever)}}  /> )}
       </section>
       <EditProfilePopup onClose={closeAllPopups} isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} />
       <AddPlacePopup isOpen={isAddPlaceOpen} close={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
