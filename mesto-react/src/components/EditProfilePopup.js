@@ -20,7 +20,6 @@ function EditProfilePopup(props){
         });
     }
 
-
     function handleChangeName(e){
         setName(e.target.value)
     }

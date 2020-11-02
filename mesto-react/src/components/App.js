@@ -38,7 +38,7 @@ React.useEffect(() =>{
 
 const handleEditProfileClick = useCallback(()=>{
   setIsEditProfilePopupOpen(true)
-}, []) 
+}, [isEditProfilePopupOpen]) 
 
 const [isAddPlaceOpen, setIsAddPlaceOpen] = React.useState(false)
 
